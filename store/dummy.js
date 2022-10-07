@@ -4,20 +4,20 @@ const db = {
   ],
 };
 
-const list = (tabla) => {
+const list = async (tabla) => {
   return db[tabla];
 };
 
-const get = (tabla, id) => {
-  let colection = list(tabla);
+const get = async (tabla, id) => {
+  let colection = await list(tabla);
   return colection.filter(item => item.id === id)[0] || null;
 };
 
-const upsert = (tabla, data) => {
+const upsert = async (tabla, data) => {
   db[collection].push(data);
 };
 
-const remove = (tabla, id) => {
+const remove = async (tabla, id) => {
   return true;
 };
 
