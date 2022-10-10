@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const auth = require('../../../auth');
 
 const TABLA = 'auth';
 
@@ -9,10 +9,21 @@ module.exports = function (injectedStore) {
     store = require('../../../store/dummy');
   };
 
+  const login = async (username, password) => {
+    console.log('login');
+    const data = await store.query(TABLA, { username: username });
+    console.log(`🚀 ~ file: controller.js ~ line 15 ~ login ~ data`, data);
+    if (data.password === password) {
+      // Generar token;
+      return auth.sign(data);
+    } else {
+      throw new Error('Informacion invalida');
+    }
+  };
+
   const upsert = (data) => {
     const authData = {
-      id: data.id || uuidv4(),
-      name: 'Luis',
+      id: data.id,
     };
 
     if (data.username) {
@@ -27,6 +38,7 @@ module.exports = function (injectedStore) {
   };
 
   return {
+    login,
     upsert,
   };
 };
