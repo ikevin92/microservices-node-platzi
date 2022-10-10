@@ -14,7 +14,11 @@ const get = async (tabla, id) => {
 };
 
 const upsert = async (tabla, data) => {
-  db[collection].push(data);
+  if (!db[tabla]) {
+    db[tabla] = [];
+  }
+  db[tabla].push(data);
+  // console.log(db);
 };
 
 const remove = async (tabla, id) => {
