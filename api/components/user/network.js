@@ -1,7 +1,7 @@
 const express = require('express');
+const secure = require('./secure');
 const response = require('../../../network/response');
 const Controller = require('./');
-const secure = require('./secure');
 
 const router = express.Router();
 
@@ -17,25 +17,29 @@ async function list(req, res) {
     const lista = await Controller.list();
     response.success(req, res, lista, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500);
+    // response.error(req, res, error.message, 500);
+    next;
   }
 };
 
-async function get(req, res) {
+async function get(req, res, next) {
   try {
     const user = await Controller.get(req.params.id);
     response.success(req, res, user, 200);
   } catch (error) {
-    response.error(req, res, error.message, 500);
+    // response.error(req, res, error.message, 500);
+    next;
   }
 };
 
-async function upsert(req, res) {
+async function upsert(req, res, next) {
   try {
     const user = await Controller.upsert(req.body);
+    console.log(`🚀 ~ file: network.js ~ line 38 ~ upsert ~ user`, user);
     response.success(req, res, user, 201);
   } catch (error) {
-    response.error(req, res, error.message, 500);
+    // response.error(req, res, error.message, 500);
+    next;
   }
 };
 
