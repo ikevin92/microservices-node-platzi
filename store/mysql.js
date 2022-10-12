@@ -72,9 +72,22 @@ function update(table, data) {
   });
 }
 
+// async function upsert(table, data) {
+//   console.log(`🚀 ~ file: mysql.js ~ line 76 ~ upsert ~ table, data`, table, data);
+//   const result = await get(table, data.id);
+//   if (result.length < 1) {
+//     return insert(table, data);
+//   } else {
+//     return update(table, data);
+//   }
+// }
+
 async function upsert(table, data) {
-  const result = await get(table, data.id);
-  if (result.length < 1) {
+  let row = [];
+  if (data.id) {
+    row = await get(table, data.id);
+  }
+  if (row.length === 0) {
     return insert(table, data);
   } else {
     return update(table, data);
