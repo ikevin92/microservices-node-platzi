@@ -1,5 +1,9 @@
 {
   "version": 2,
+  "env": {
+    "MYSQL_HOST": "sql10.freemysqlhosting.net",
+    "MYSQL_USER": "sql10525633"
+  },
   "builds": [
     {
       "src": "api/index-api.js",
