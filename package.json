@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon api/index.js",
-    "mysql": "nodemon mysql/index.js"
+    "mysql": "nodemon mysql/index.js",
+    "post": "nodemon post/index.js"
   },
   "author": "",
   "license": "ISC",
