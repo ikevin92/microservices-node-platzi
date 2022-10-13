@@ -14,7 +14,7 @@ router.post('/', upsert);
 router.put('/', secure('update'), upsert);
 
 // Internal Functions
-async function list(req, res) {
+async function list(req, res, next) {
   try {
     const lista = await Controller.list();
     response.success(req, res, lista, 200);
@@ -36,7 +36,6 @@ async function get(req, res, next) {
 async function upsert(req, res, next) {
   try {
     const user = await Controller.upsert(req.body);
-    console.log(`🚀 ~ file: network.js ~ line 38 ~ upsert ~ user`, user);
     response.success(req, res, user, 201);
   } catch (error) {
     next(error);

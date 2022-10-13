@@ -11,6 +11,9 @@ module.exports = {
     password: process.env.MYSQL_PASS || 'KXYQIa7alh',
     database: process.env.MYSQL_DB || 'sql10525633',
   },
+  mysqlService: {
+    port: process.env.MYSQL_SRV_PORT || 3001,
+  }
 };
 
 //https://www.freemysqlhosting.net/account/?msg=943
