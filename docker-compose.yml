@@ -6,8 +6,8 @@ services:
       - SYS_NICE
     restart: always
     environment:
-      - MYSQL_DATABASE=quotes
-      - MYSQL_ROOT_PASSWORD=mauFJcuf5dhRMQrjj
+      - MYSQL_DATABASE=microservices
+      - MYSQL_ROOT_PASSWORD=admin
     container_name: nodeplatzi
     ports:
       - '3306:3306'
