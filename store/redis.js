@@ -9,13 +9,16 @@ const client = redis.createClient({
 });
 
 function list(table) {
+  console.log(`🚀 ~ file: redis.js ~ line 12 ~ list ~ table`, table);
   return new Promise((resolve, reject) => {
     client.get(table, (err, data) => {
+      console.log(`🚀 ~ file: redis.js ~ line 15 ~ client.get ~ err`, err);
       if (err) return reject(err);
+      console.log('paso');
 
       let res = data || null;
       if (data) {
-        res = JSON.stringify(data);
+        res = JSON.parse(data);
       }
       resolve(res);
     });
@@ -23,7 +26,7 @@ function list(table) {
 }
 
 function get(table, id) {
-  //
+  return list(table + '_' + id);
 }
 
 async function upsert(table, data) {

@@ -72,16 +72,6 @@ function update(table, data) {
   });
 }
 
-// async function upsert(table, data) {
-//   console.log(`🚀 ~ file: mysql.js ~ line 76 ~ upsert ~ table, data`, table, data);
-//   const result = await get(table, data.id);
-//   if (result.length < 1) {
-//     return insert(table, data);
-//   } else {
-//     return update(table, data);
-//   }
-// }
-
 async function upsert(table, data) {
   let row = [];
   if (data.id) {
