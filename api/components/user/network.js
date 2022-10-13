@@ -8,6 +8,7 @@ const router = express.Router();
 // Routes
 router.get('/', list);
 router.post('/follow/:id', secure('follow'), follow);
+router.get('/:id/following', following);
 router.get('/:id', get);
 router.post('/', upsert);
 router.put('/', secure('update'), upsert);
@@ -18,7 +19,7 @@ async function list(req, res) {
     const lista = await Controller.list();
     response.success(req, res, lista, 200);
   } catch (error) {
-    next;
+    next(error);
   }
 };
 
@@ -28,7 +29,7 @@ async function get(req, res, next) {
     response.success(req, res, user, 200);
   } catch (error) {
     // response.error(req, res, error.message, 500);
-    next;
+    next(error);
   }
 };
 
@@ -38,7 +39,7 @@ async function upsert(req, res, next) {
     console.log(`🚀 ~ file: network.js ~ line 38 ~ upsert ~ user`, user);
     response.success(req, res, user, 201);
   } catch (error) {
-    next;
+    next(error);
   }
 };
 
@@ -47,9 +48,17 @@ async function follow(req, res, next) {
     const data = await Controller.follow(req.user.id, req.params.id);
     response.success(req, res, data, 201);
   } catch (error) {
-    next;
+    next(error);
   }
+}
 
+async function following(req, res, next) {
+  try {
+    const data = await Controller.following(req.params.id);
+    response.success(req, res, data, 200);
+  } catch (error) {
+    next(error);
+  }
 }
 
 module.exports = router;
