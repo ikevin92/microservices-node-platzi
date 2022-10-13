@@ -9,10 +9,8 @@ const client = redis.createClient({
 });
 
 function list(table) {
-  console.log(`🚀 ~ file: redis.js ~ line 12 ~ list ~ table`, table);
   return new Promise((resolve, reject) => {
     client.get(table, (err, data) => {
-      console.log(`🚀 ~ file: redis.js ~ line 15 ~ client.get ~ err`, err);
       if (err) return reject(err);
       console.log('paso');
 
